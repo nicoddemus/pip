@@ -297,7 +297,8 @@ def test_install_from_local_directory_with_symlinks_to_directories(
     egg_info_folder = (
         script.site_packages / 'symlinks-0.1.dev0-py%s.egg-info' % pyversion
     )
-    assert pkg_folder in result.files_created, str(result.stdout)
+    msg = 'pkg_folder: %r\nfiles_created: %s\noutput:\n%s' % (pkg_folder, list(result.files_created.keys()), str(result.stdout))
+    assert pkg_folder in result.files_created, msg
     assert egg_info_folder in result.files_created, str(result)
 
 
