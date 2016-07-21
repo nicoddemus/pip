@@ -1,7 +1,7 @@
 freezegun
 pretend
 # Pinned to 2.7.2 to avoid an issue with parallel builds
-pytest
+git+https://github.com/nicoddemus/pytest.git@pip-xdist
 pytest-capturelog
 # Pinned to 0.5 to stay compatible with pytest==2.7.2
 pytest-timeout
