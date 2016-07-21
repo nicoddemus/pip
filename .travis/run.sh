@@ -54,4 +54,4 @@ fi
 # tox -- -m unit $TOXARGS
 
 # Run our integration tests
-tox -- -m integration -n 8 -x
+tox -- -m integration -n 1 -v -x
