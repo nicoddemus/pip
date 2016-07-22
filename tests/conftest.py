@@ -42,8 +42,8 @@ def pytest_collection_modifyitems(items):
             )
 
 
-@pytest.fixture
-def tmpdir(request):
+@pytest.yield_fixture
+def tmpdir(tmpdir):
     """
     Return a temporary directory path object which is unique to each test
     function invocation, created as a sub directory of the base temporary
@@ -53,16 +53,11 @@ def tmpdir(request):
     path object instead of py.path.local as well as deleting the temporary
     directories at the end of each test case.
     """
-    name = request.node.name
-    name = py.std.re.sub("[\W]", "_", name)
-    tmp = request.config._tmpdirhandler.mktemp(name, numbered=True)
+    assert tmpdir.isdir()
+    yield Path(str(tmpdir))
+    tmpdir.remove()
+    assert not tmpdir.isdir()
 
-    # Clear out the temporary directory after the test has finished using it.
-    # This should prevent us from needing a multiple gigabyte temporary
-    # directory while running the tests.
-    request.addfinalizer(lambda: shutil.rmtree(str(tmp), ignore_errors=True))
-
-    return Path(str(tmp))
 
 
 @pytest.fixture(autouse=True)
