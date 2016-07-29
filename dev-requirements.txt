@@ -1,6 +1,6 @@
 freezegun
 pretend
-pytest
+git+https://github.com/pytest-dev/pytest@features
 pytest-capturelog
 pytest-timeout
 pytest-xdist
